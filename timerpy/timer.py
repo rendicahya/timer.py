@@ -1,4 +1,4 @@
-from time import perf_counter, sleep
+from time import perf_counter
 
 from timerpy.printer import Printer
 from timerpy.utils import format_time
