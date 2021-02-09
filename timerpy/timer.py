@@ -6,7 +6,7 @@ from timerpy.utils import format_time
 
 class Timer:
     def __init__(self, tag: str = 'timer.py', format: str = '%02d:%02d:%02d.%s', ms_digits: int = 3,
-                 color: str = 'green'):
+                 color: str = 'green', start: bool = False):
         self.time_data = []
         self.is_started = False
         self.start_time = None
@@ -14,6 +14,9 @@ class Timer:
         self.ms_digits = ms_digits
         self.color = color
         self.print = Printer(tag)
+
+        if start:
+            self.start()
 
     def start(self) -> None:
         if self.is_started:
