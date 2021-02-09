@@ -1,44 +1,62 @@
 from time import perf_counter
-from time import sleep
 
-from print_color import print as print_color
+from timerpy.printer import Printer
+from timerpy.utils import format_time
 
 
 class Timer:
-    def __init__(self, label='timer.py', format='%02d:%02d:%02d.%s', ms_digits=3, color='green'):
-        self.label = label
+    def __init__(self, tag='timer.py', format='%02d:%02d:%02d.%s', ms_digits=3, color='green'):
+        self.time_data = []
+        self.is_started = False
         self.start_time = None
         self.format = format
         self.ms_digits = ms_digits
         self.color = color
+        self.print = Printer(tag)
 
     def start(self):
-        self.start_time = perf_counter()
+        if self.is_started:
+            self.print.error('Timer already started')
+        else:
+            self.start_time = perf_counter()
+            self.is_started = True
+
+    def pause(self):
+        if self.is_started:
+            elapsed = perf_counter() - self.start_time
+            self.time_data.append(elapsed)
+            self.is_started = False
+        elif len(self.time_data) == 0:
+            self.print.error('Timer not started')
+        else:
+            self.print.error('Timer already paused')
+
+    def resume(self):
+        if self.is_started:
+            self.print.error('Timer already started')
+        elif len(self.time_data) == 0:
+            self.print.error('Timer not started')
+        else:
+            self.start_time = perf_counter()
+            self.is_started = True
 
     def get_elapsed(self):
-        return perf_counter() - self.start_time
+        elapsed = perf_counter() - self.start_time
+        total_time = sum(self.time_data) + elapsed
+
+        return format_time(total_time, self.ms_digits, self.format)
 
     def stop(self):
-        if self.start_time is None:
-            print_color('Timer not started', tag=self.label, tag_color='red', color='white')
+        if not self.is_started and len(self.time_data) == 0:
+            self.print.error('Timer not started')
         else:
-            stop_time = perf_counter()
-            elapsed = stop_time - self.start_time
-            self.start_time = None
+            if self.is_started:
+                elapsed = perf_counter() - self.start_time
+                self.time_data.append(elapsed)
 
-            print_color(self.format_time(elapsed), tag=self.label, tag_color=self.color, color='white')
+            total_time = sum(self.time_data)
+            self.is_started = False
+            formatted_time = format_time(total_time, self.ms_digits, self.format)
+            self.time_data = []
 
-    def format_time(self, time):
-        hour = time // 3600
-        min = time % 3600 // 60
-        sec = time % 60
-        ms = str(time % 1)[2:self.ms_digits + 2]
-
-        return self.format % (hour, min, sec, ms)
-
-
-if __name__ == '__main__':
-    t = Timer('test')
-    # t.start()
-    sleep(1)
-    t.stop()
+            self.print.info(formatted_time)

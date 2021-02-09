@@ -5,7 +5,7 @@ with open('README.md', 'r') as fh:
 
 setuptools.setup(
     name='timer.py',
-    version='0.0.1',
+    version='0.2.0',
     author='Randy Cahya Wihandika',
     author_email='rendicahya@gmail.com',
     description='Simple timer for Python.',
