@@ -1,4 +1,4 @@
-from time import perf_counter, sleep
+from time import perf_counter
 
 from timerpy.printer import Printer
 from timerpy.utils import format_time
@@ -62,11 +62,3 @@ class Timer:
         self.is_started = False
 
         return total_time
-
-
-if __name__ == '__main__':
-    t = Timer()
-    t.start()
-    sleep(1)
-    t.elapsed(tag='elapsed')
-    t.stop(tag='stop')
