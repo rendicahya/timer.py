@@ -56,7 +56,17 @@ class Timer:
 
             return total_time
 
-    def stop(self) -> None:
-        self.elapsed()
+    def stop(self, print: bool = True, tag: str = None) -> float:
+        total_time = self.elapsed(print, tag)
         self.time_data = []
         self.is_started = False
+
+        return total_time
+
+
+if __name__ == '__main__':
+    t = Timer()
+    t.start()
+    sleep(1)
+    t.elapsed(tag='elapsed')
+    t.stop(tag='stop')
