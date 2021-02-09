@@ -1,4 +1,4 @@
-from time import perf_counter
+from time import perf_counter, sleep
 
 from timerpy.printer import Printer
 from timerpy.utils import format_time
@@ -41,23 +41,17 @@ class Timer:
             self.start_time = perf_counter()
             self.is_started = True
 
-    def get_elapsed(self):
-        elapsed = perf_counter() - self.start_time
-        total_time = sum(self.time_data) + elapsed
-
-        return format_time(total_time, self.ms_digits, self.format)
-
-    def stop(self) -> None:
+    def elapsed(self) -> None:
         if not self.is_started and len(self.time_data) == 0:
             self.print.error('Timer not started')
         else:
-            if self.is_started:
-                elapsed = perf_counter() - self.start_time
-                self.time_data.append(elapsed)
-
-            total_time = sum(self.time_data)
-            self.is_started = False
+            elapsed = perf_counter() - self.start_time if self.is_started else 0
+            total_time = sum(self.time_data) + elapsed
             formatted_time = format_time(total_time, self.ms_digits, self.format)
-            self.time_data = []
 
             self.print.info(formatted_time)
+
+    def stop(self) -> None:
+        self.elapsed()
+        self.time_data = []
+        self.is_started = False
