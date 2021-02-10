@@ -18,7 +18,10 @@ class Timer:
         if start:
             self.start()
 
-    def start(self) -> None:
+    def start(self, tag: str = None) -> None:
+        if tag is not None:
+            self.print.set_tag(tag)
+
         if self.is_started:
             self.print.error('Timer already started')
         else:
