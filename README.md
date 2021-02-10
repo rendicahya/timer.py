@@ -1,7 +1,9 @@
 # timer.py
 
 ## Installation
-`pip install timerpy`
+```python
+pip install timerpy
+```
 
 ## Usage
 ```python
