@@ -4,7 +4,7 @@
 `pip install timerpy`
 
 ## Usage
-```
+```python
 from time import sleep
 from timerpy import Timer
 
