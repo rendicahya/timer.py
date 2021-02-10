@@ -8,7 +8,7 @@ setuptools.setup(
     version='1.2.1',
     author='Randy Cahya Wihandika',
     author_email='rendicahya@gmail.com',
-    description='Simple timer for Python.',
+    description='Intuitive timer for Python.',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/rendicahya/timer.py',

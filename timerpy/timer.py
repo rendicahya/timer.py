@@ -5,8 +5,8 @@ from timerpy.utils import format_time
 
 
 class Timer:
-    def __init__(self, tag: str = 'timer.py', format: str = '%02d:%02d:%02d.%s', ms_digits: int = 3,
-                 color: str = 'green', start: bool = False):
+    def __init__(self, tag: str = 'timer.py', format: str = '%02d:%02d:%02d.%s',
+                 ms_digits: int = 3, color: str = 'green', start: bool = False):
         self.time_data = []
         self.is_started = False
         self.start_time = None
@@ -28,8 +28,9 @@ class Timer:
     def pause(self) -> None:
         if self.is_started:
             elapsed = perf_counter() - self.start_time
-            self.time_data.append(elapsed)
             self.is_started = False
+
+            self.time_data.append(elapsed)
         elif len(self.time_data) == 0:
             self.print.error('Timer not started')
         else:
