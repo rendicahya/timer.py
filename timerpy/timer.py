@@ -44,7 +44,7 @@ class Timer:
             self.start_time = perf_counter()
             self.is_started = True
 
-    def elapsed(self, print: bool = True, tag: str = None) -> float:
+    def elapsed(self, tag: str = None, print: bool = True) -> float:
         if not self.is_started and len(self.time_data) == 0:
             self.print.error('Timer not started')
 
@@ -59,8 +59,8 @@ class Timer:
 
             return total_time
 
-    def stop(self, print: bool = True, tag: str = None) -> float:
-        total_time = self.elapsed(print, tag)
+    def stop(self, tag: str = None, print: bool = True) -> float:
+        total_time = self.elapsed(tag, print)
         self.time_data = []
         self.is_started = False
 
