@@ -2,7 +2,7 @@
 
 ## Installation
 ```python
-pip install timerpy
+pip install timer.py
 ```
 
 ## Usage
