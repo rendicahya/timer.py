@@ -1,5 +1,5 @@
 from time import sleep
-from timer import Timer
+from timer_py import Timer
 
 timer = Timer('Some Title')
 timer.start()
@@ -38,6 +38,6 @@ print(elapsed)
 # 2.0134578000000003
 
 # Stop the timer
-timer.stop('Timer stopped')
+timer.stop()
 # Output:
-# [Timer stopped] 00:00:02.013
+# [Some Title]] 00:00:02.013

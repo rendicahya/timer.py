@@ -1,7 +1,7 @@
 from time import perf_counter
 
-from timer.printer import Printer
-from timer.utils import format_time
+from timer_py.printer import Printer
+from timer_py.utils import format_time
 
 
 class Timer:
@@ -18,7 +18,7 @@ class Timer:
         if start:
             self.start()
 
-    def start(self, tag: str = None) -> None:
+    def start(self, tag: str = None):
         if tag is not None:
             self.print.set_tag(tag)
 
@@ -27,6 +27,8 @@ class Timer:
         else:
             self.start_time = perf_counter()
             self.is_started = True
+
+        return self
 
     def pause(self) -> None:
         if self.is_started:

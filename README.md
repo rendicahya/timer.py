@@ -13,9 +13,9 @@ from timer_py import Timer
 timer = Timer('Some Title')
 timer.start()
 # Or:
-# timer = Timer('Some Title', start=True)
+# timer = Timer('Some Title').start()
 
-# Some one second process
+# Some one-second process
 sleep(1)
 
 # Printing the elapsed time. The timer will continue to run.
@@ -32,7 +32,7 @@ sleep(1)
 # Resume the timer
 timer.resume()
 
-# Another one second process
+# Another one-second process
 sleep(1)
 
 # Overriding the tag
@@ -47,7 +47,7 @@ print(elapsed)
 # 2.0134578000000003
 
 # Stop the timer
-timer.stop('Timer stopped')
+timer.stop()
 # Output:
-# [Timer stopped] 00:00:02.013
+# [Some Title] 00:00:02.013
 ```
