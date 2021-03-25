@@ -1,7 +1,7 @@
 from time import perf_counter
 
-from timerpy.printer import Printer
-from timerpy.utils import format_time
+from timer.printer import Printer
+from timer.utils import format_time
 
 
 class Timer:

@@ -1,5 +1,5 @@
 from time import sleep
-from timerpy import Timer
+from timer import Timer
 
 timer = Timer('Some Title')
 timer.start()

@@ -5,10 +5,10 @@ with open('README.md', 'r') as fh:
 
 setuptools.setup(
     name='timer.py',
-    version='1.3.0',
+    version='2.0.0',
     author='Randy Cahya Wihandika',
     author_email='rendicahya@gmail.com',
-    description='Intuitive timer for Python.',
+    description='Easy and accurate timer for Python.',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/rendicahya/timer.py',
