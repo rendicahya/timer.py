@@ -13,17 +13,17 @@ class Timer:
         self.format = format
         self.ms_digits = ms_digits
         self.color = color
-        self.print = Printer(tag)
+        self.printer = Printer(tag)
 
         if start:
             self.start()
 
     def start(self, tag: str = None):
         if tag is not None:
-            self.print.set_tag(tag)
+            self.printer.set_tag(tag)
 
         if self.is_started:
-            self.print.error('Timer already started')
+            self.printer.error('Timer already started')
         else:
             self.start_time = perf_counter()
             self.is_started = True
@@ -37,22 +37,22 @@ class Timer:
 
             self.time_data.append(elapsed)
         elif len(self.time_data) == 0:
-            self.print.error('Timer not started')
+            self.printer.error('Timer not started')
         else:
-            self.print.error('Timer already paused')
+            self.printer.error('Timer already paused')
 
     def resume(self) -> None:
         if self.is_started:
-            self.print.error('Timer already started')
+            self.printer.error('Timer already started')
         elif len(self.time_data) == 0:
-            self.print.error('Timer not started')
+            self.printer.error('Timer not started')
         else:
             self.start_time = perf_counter()
             self.is_started = True
 
     def elapsed(self, tag: str = None, print: bool = True) -> float:
         if not self.is_started and len(self.time_data) == 0:
-            self.print.error('Timer not started')
+            self.printer.error('Timer not started')
 
             return 0
         else:
@@ -61,9 +61,12 @@ class Timer:
             formatted_time = format_time(total_time, self.ms_digits, self.format)
 
             if print:
-                self.print.info(formatted_time, tag)
+                self.printer.info(formatted_time, tag)
 
             return total_time
+
+    def set_tag(self, tag: str) -> None:
+        self.printer.set_tag(tag)
 
     def stop(self, tag: str = None, print: bool = True) -> float:
         total_time = self.elapsed(tag, print)
