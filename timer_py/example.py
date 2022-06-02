@@ -1,37 +1,47 @@
 from time import sleep
+
 from timer_py import Timer
 
-timer = Timer('Some Title')
+timer = Timer()
 timer.start()
 # Or:
-# timer = Timer('Some Title', start=True)
+# timer = Timer(start=True)
 
-# Some one second process
+# A one-second process
 sleep(1)
 
 # Printing the elapsed time. The timer will continue to run.
 timer.elapsed()
 # Output:
-# [Some Title] 00:00:01.004
+# [timer.py] 00:00:01.004
 
-# Pause the timer
+# Pause the timer.
 timer.pause()
 
-# Process that won't be counted
+# A one-second process that won't be counted while the timer is paused.
 sleep(1)
 
-# Resume the timer
+# Resume the timer.
 timer.resume()
 
-# Another one second process
+# Another one-second process.
 sleep(1)
 
-# Overriding the tag
+# Overriding the tag for one time only (the original tag will still be remembered).
 timer.elapsed('Checkpoint 1')
 # Output:
-# [Checkpoint 1] 00:00:02.013
+# [Checkpoint 1] 00:00:02.008
 
-# Storing the elapsed time to a variable while hiding the output
+# Changing the tag
+timer.set_tag('Custom title')
+
+# Restarting the time
+timer.restart()
+
+# Another one-second process.
+sleep(1)
+
+# Storing the elapsed time to a variable as a float while hiding the output.
 elapsed = timer.elapsed(print=False)
 print(elapsed)
 # Output:
@@ -40,4 +50,4 @@ print(elapsed)
 # Stop the timer
 timer.stop()
 # Output:
-# [Some Title]] 00:00:02.013
+# [Custom title] 00:00:01.006

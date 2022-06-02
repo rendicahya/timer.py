@@ -50,6 +50,11 @@ class Timer:
             self.start_time = perf_counter()
             self.is_started = True
 
+    def restart(self):
+        self.start_time = perf_counter()
+        self.time_data = []
+        self.is_started = True
+
     def elapsed(self, tag: str = None, print: bool = True) -> float:
         if not self.is_started and len(self.time_data) == 0:
             self.printer.error('Timer not started')
