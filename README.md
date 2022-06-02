@@ -1,5 +1,7 @@
 # timer.py
 
+timer.py provides convenient functions to measure time in Python. 
+
 ## Installation
 ```
 pip install timer.py
