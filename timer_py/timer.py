@@ -5,8 +5,14 @@ from timer_py.utils import format_time
 
 
 class Timer:
-    def __init__(self, tag: str = 'timer.py', format: str = '%02d:%02d:%02d.%s',
-                 ms_digits: int = 3, color: str = 'green', start: bool = False):
+    def __init__(
+        self,
+        tag: str = "timer.py",
+        format: str = "%02d:%02d:%02d.%s",
+        ms_digits: int = 3,
+        color: str = "green",
+        start: bool = False,
+    ):
         self.time_data = []
         self.is_started = False
         self.start_time = None
@@ -23,7 +29,7 @@ class Timer:
             self.printer.set_tag(tag)
 
         if self.is_started:
-            self.printer.error('Timer already started')
+            self.printer.error("Timer already started")
         else:
             self.start_time = perf_counter()
             self.is_started = True
@@ -37,27 +43,27 @@ class Timer:
 
             self.time_data.append(elapsed)
         elif len(self.time_data) == 0:
-            self.printer.error('Timer not started')
+            self.printer.error("Timer not started")
         else:
-            self.printer.error('Timer already paused')
+            self.printer.error("Timer already paused")
 
     def resume(self) -> None:
         if self.is_started:
-            self.printer.error('Timer already started')
+            self.printer.error("Timer already started")
         elif len(self.time_data) == 0:
-            self.printer.error('Timer not started')
+            self.printer.error("Timer not started")
         else:
             self.start_time = perf_counter()
             self.is_started = True
 
-    def restart(self):
+    def restart(self) -> None:
         self.start_time = perf_counter()
         self.time_data = []
         self.is_started = True
 
     def elapsed(self, tag: str = None, print: bool = True) -> float:
         if not self.is_started and len(self.time_data) == 0:
-            self.printer.error('Timer not started')
+            self.printer.error("Timer not started")
 
             return 0
         else:
@@ -73,9 +79,10 @@ class Timer:
     def set_tag(self, tag: str) -> None:
         self.printer.set_tag(tag)
 
-    def stop(self, tag: str = None, print: bool = True) -> float:
-        total_time = self.elapsed(tag, print)
+    def stop(self, tag: str = None, print: bool = True) -> str:
+        elapsed_time = self.elapsed(tag, print)
+        formatted_time = format_time(elapsed_time)
         self.time_data = []
         self.is_started = False
 
-        return total_time
+        return formatted_time
