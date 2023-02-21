@@ -28,12 +28,12 @@ timer.resume()
 sleep(1)
 
 # Overriding the tag for one time only (the original tag will still be remembered).
-timer.elapsed('Checkpoint 1')
+timer.elapsed("Checkpoint 1")
 # Output:
 # [Checkpoint 1] 00:00:02.008
 
 # Changing the tag
-timer.set_tag('Custom title')
+timer.set_tag("Custom title")
 
 # Restarting the time
 timer.restart()
