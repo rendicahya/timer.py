@@ -61,7 +61,7 @@ class Timer:
         self.time_data = []
         self.is_started = True
 
-    def elapsed(self, tag: str = None, print: bool = True) -> float:
+    def elapsed(self, tag: str = None, print: bool = True, raw: bool = False):
         if not self.is_started and len(self.time_data) == 0:
             self.printer.error("Timer not started")
 
@@ -74,14 +74,14 @@ class Timer:
             if print:
                 self.printer.info(formatted_time, tag)
 
-            return total_time
+            return elapsed if raw else formatted_time
 
     def set_tag(self, tag: str) -> None:
         self.printer.set_tag(tag)
 
     def stop(self, tag: str = None, print: bool = True) -> str:
-        elapsed_time = self.elapsed(tag, print)
-        formatted_time = format_time(elapsed_time)
+        elapsed_time = self.elapsed(tag, print, raw=True)
+        formatted_time = format_time(elapsed_time, self.ms_digits, self.format)
         self.time_data = []
         self.is_started = False
 

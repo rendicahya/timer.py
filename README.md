@@ -10,7 +10,6 @@ pip install timer.py
 ## Usage
 ```python
 from time import sleep
-
 from timer_py import Timer
 
 timer = Timer()
@@ -24,7 +23,7 @@ sleep(1)
 # Printing the elapsed time. The timer will continue to run.
 timer.elapsed()
 # Output:
-# [timer.py] 00:00:01.004
+# [timer.py] 00:00:01.001
 
 timer.pause()
 
@@ -39,7 +38,7 @@ sleep(1)
 # Overriding the tag for one time only (the original tag will still be remembered).
 timer.elapsed('Checkpoint 1')
 # Output:
-# [Checkpoint 1] 00:00:02.008
+# [Checkpoint 1] 00:00:02.002
 
 timer.set_tag('Custom title')
 
@@ -52,9 +51,9 @@ sleep(1)
 elapsed = timer.elapsed(print=False)
 print(elapsed)
 # Output:
-# 2.0134578000000003
+# 00:00:01.001
 
 timer.stop()
 # Output:
-# [Custom title] 00:00:01.006
+# [Custom title] 00:00:01.001
 ```
