@@ -10,44 +10,44 @@ timer.start()
 # A one-second process
 sleep(1)
 
-# Printing the elapsed time. The timer will continue to run.
+# Printing the elapsed time. The timer will continue to run
 timer.elapsed()
 # Output:
-# [timer.py] 00:00:01.004
+# 00:00:01.000
 
-# Pause the timer.
+# Pause the timer
 timer.pause()
 
-# A one-second process that won't be counted while the timer is paused.
+# A one-second process that won't be counted while the timer is paused
 sleep(1)
 
-# Resume the timer.
+# Resume the timer
 timer.resume()
 
-# Another one-second process.
+# Another one-second process
 sleep(1)
 
-# Overriding the tag for one time only (the original tag will still be remembered).
+# Overriding the tag for this time only (the previously set tag will still be remembered)
 timer.elapsed("Checkpoint 1")
 # Output:
-# [Checkpoint 1] 00:00:02.008
+# [Checkpoint 1] 00:00:02.000
 
 # Changing the tag
-timer.set_tag("Custom title")
+timer.set_tag("Timer demo")
 
 # Restarting the time
 timer.restart()
 
-# Another one-second process.
+# Another one-second process
 sleep(1)
 
-# Storing the elapsed time to a variable as a float while hiding the output.
+# Storing the elapsed time to a variable as a float while hiding the output
 elapsed = timer.elapsed(print=False)
 print(elapsed)
 # Output:
-# 2.0134578000000003
+# 00:00:01.000
 
 # Stop the timer
 timer.stop()
 # Output:
-# [Custom title] 00:00:01.006
+# [Custom tag] 00:00:01.000
