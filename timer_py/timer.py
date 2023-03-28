@@ -7,7 +7,7 @@ from timer_py.utils import format_time
 class Timer:
     def __init__(
         self,
-        tag: str = "timer.py",
+        tag: str = None,
         format: str = "%02d:%02d:%02d.%s",
         ms_digits: int = 3,
         color: str = "green",
@@ -19,14 +19,13 @@ class Timer:
         self.format = format
         self.ms_digits = ms_digits
         self.color = color
-        self.printer = Printer(tag)
+        self.printer = Printer()
 
         if start:
             self.start()
 
     def start(self, tag: str = None):
-        if tag is not None:
-            self.printer.set_tag(tag)
+        self.tag = tag
 
         if self.is_started:
             self.printer.error("Timer already started")
@@ -68,21 +67,28 @@ class Timer:
             return 0
         else:
             elapsed = perf_counter() - self.start_time if self.is_started else 0
+
+            if raw:
+                return elapsed
+
             total_time = sum(self.time_data) + elapsed
             formatted_time = format_time(total_time, self.ms_digits, self.format)
 
             if print:
-                self.printer.info(formatted_time, tag)
+                self.printer.info(formatted_time, self.tag if tag is None else tag)
 
-            return elapsed if raw else formatted_time
+            return formatted_time
 
     def set_tag(self, tag: str) -> None:
-        self.printer.set_tag(tag)
+        self.tag = tag
 
     def stop(self, tag: str = None, print: bool = True) -> str:
         elapsed_time = self.elapsed(tag, print, raw=True)
         formatted_time = format_time(elapsed_time, self.ms_digits, self.format)
         self.time_data = []
         self.is_started = False
+
+        if print:
+            self.printer.info(formatted_time, self.tag if tag is None else tag)
 
         return formatted_time
