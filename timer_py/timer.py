@@ -11,22 +11,17 @@ class Timer:
         format: str = "%02d:%02d:%02d.%s",
         ms_digits: int = 3,
         color: str = "green",
-        start: bool = False,
     ):
         self.time_data = []
         self.is_started = False
         self.start_time = None
         self.format = format
         self.ms_digits = ms_digits
+        self.tag = tag
         self.color = color
         self.printer = Printer()
 
-        if start:
-            self.start()
-
-    def start(self, tag: str = None):
-        self.tag = tag
-
+    def start(self):
         if self.is_started:
             self.printer.error("Timer already started")
         else:
