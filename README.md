@@ -56,3 +56,7 @@ timer.stop()
 # Output:
 # [Custom title] 00:00:01.001
 ```
+
+## Todo's:
+- Return `{hour: h, min: m, sec: s, fmt: formatted}` on `stop()` and `elapsed()`
+- Implement `__repr__()`
